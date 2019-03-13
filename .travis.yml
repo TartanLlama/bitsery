@@ -30,6 +30,10 @@ matrix:
         apt:
           packages:
             - clang-7
+          sources:
+            - llvm-toolchain-xenial-7
+            - sourceline: 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-7 main'
+              key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
       compiler: clang-7
       env:
         - CXXSTD=17
@@ -44,6 +48,8 @@ install:
   - cd ..
 
 before_script:
+  - mkdir build
+  - cd build
   - cmake -DBITSERY_BUILD_TESTS=ON -DCMAKE_CXX_STANDARD=$CXXSTD ..
 
 script:
