@@ -7,11 +7,11 @@ matrix:
     - addons:
         apt:
           packages:
-            - g++-4.9
+            - g++-5
       env:
         - CXXSTD=11
-        - CXX_COMPILER=g++-4.9
-        - CC_COMPILER=gcc-4.9
+        - CXX_COMPILER=g++-5
+        - CC_COMPILER=gcc-5
     - addons:
         apt:
           packages:
@@ -33,8 +33,10 @@ matrix:
     - addons:
         apt:
           packages:
+            - libstdc++-7-dev
             - clang-8
           sources:
+            - ubuntu-toolchain-r-test
             - llvm-toolchain-xenial-8
             - sourceline: 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-8 main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
