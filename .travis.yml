@@ -1,6 +1,7 @@
 dist: xenial
 language: cpp
-
+# CXX_COMPILER and CC_COMPILER is defined, because travis will override CC and CXX environment variables
+# We'll need to override them back "before_install"
 matrix:
   include:
     - addons:
@@ -9,16 +10,16 @@ matrix:
             - g++-4.9
       env:
         - CXXSTD=11
-        - CXX=g++-4.9
-        - CC=gcc-4.9
+        - CXX_COMPILER=g++-4.9
+        - CC_COMPILER=gcc-4.9
     - addons:
         apt:
           packages:
             - clang-3.9
       env:
         - CXXSTD=11
-        - CXX=clang++-3.9
-        - CC=clang-3.9
+        - CXX_COMPILER=clang++-3.9
+        - CC_COMPILER=clang-3.9
     - addons:
         apt:
           packages:
@@ -27,8 +28,8 @@ matrix:
             - ubuntu-toolchain-r-test
       env:
         - CXXSTD=17
-        - CXX=g++-7
-        - CC=gcc-7
+        - CXX_COMPILER=g++-7
+        - CC_COMPILER=gcc-7
     - addons:
         apt:
           packages:
@@ -39,8 +40,12 @@ matrix:
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
       env:
         - CXXSTD=17
-        - CXX=clang++-8
-        - CC=clang-8
+        - CXX_COMPILER=clang++-8
+        - CC_COMPILER=clang-8
+
+before_install:
+  - export CXX=$CXX_COMPILER
+  - export CC=$CC_COMPILER
 
 install:
   - wget https://github.com/google/googletest/archive/release-1.8.0.tar.gz
@@ -55,6 +60,7 @@ before_script:
   - mkdir build
   - cd build
   - cmake -DBITSERY_BUILD_TESTS=ON -DCMAKE_CXX_STANDARD=$CXXSTD ..
+
 
 script:
   - make
