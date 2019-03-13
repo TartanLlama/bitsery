@@ -10,6 +10,8 @@ matrix:
       compiler: g++-4.9
       env:
         - CXXSTD=11
+        - CXX=g++-4.9
+        - CC=gcc-4.9
     - addons:
         apt:
           packages:
@@ -17,6 +19,8 @@ matrix:
       compiler: clang-3.9
       env:
         - CXXSTD=11
+        - CXX=clang++-3.9
+        - CC=clang-3.9
     - addons:
         apt:
           packages:
@@ -26,17 +30,21 @@ matrix:
       compiler: g++-7
       env:
         - CXXSTD=17
+        - CXX=g++-7
+        - CC=gcc-7
     - addons:
         apt:
           packages:
-            - clang-7
+            - clang-8
           sources:
-            - llvm-toolchain-xenial-7
-            - sourceline: 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-7 main'
+            - llvm-toolchain-xenial-8
+            - sourceline: 'deb http://apt.llvm.org/xenial/ llvm-toolchain-xenial-8 main'
               key_url: 'https://apt.llvm.org/llvm-snapshot.gpg.key'
-      compiler: clang-7
+      compiler: clang-8
       env:
         - CXXSTD=17
+        - CXX=clang++-8
+        - CC=clang-8
 
 install:
   - wget https://github.com/google/googletest/archive/release-1.8.0.tar.gz
