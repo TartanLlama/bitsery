@@ -3,31 +3,36 @@ language: cpp
 
 matrix:
   include:
-    - env:
-        - CXX=g++-4.9
-        - CC=gcc-4.9
+    - addons:
+        apt:
+          packages:
+            - g++-4.9
+      compiler: g++-4.9
+      env:
         - CXXSTD=11
-    - env:
-        - CXX=clang++-3.9
-        - CC=clang-3.9
+    - addons:
+        apt:
+          packages:
+            - clang-3.9
+      compiler: clang-3.9
+      env:
         - CXXSTD=11
-    - env:
-        - CXX=g++-7.4
-        - CC=gcc-7.4
+    - addons:
+        apt:
+          packages:
+            - g++-7
+          sources:
+            - ubuntu-toolchain-r-test
+      compiler: g++-7
+      env:
         - CXXSTD=17
-    - env:
-        - CXX=clang++-7.0
-        - CC=clang-7.0
+    - addons:
+        apt:
+          packages:
+            - clang-7
+      compiler: clang-7
+      env:
         - CXXSTD=17
-  fast_finish: true
-
-addons:
-  apt:
-    packages:
-      - g++4.9
-      - g++7.4
-      - clang-3.9
-      - clang-7.0
 
 install:
   - wget https://github.com/google/googletest/archive/release-1.8.0.tar.gz
@@ -41,5 +46,8 @@ install:
 before_script:
   - cmake -DBITSERY_BUILD_TESTS=ON -DCMAKE_CXX_STANDARD=$CXXSTD ..
 
-script: make && (cd tests && ctest)
+script:
+  - make
+  - cd tests
+  - ctest
 
