@@ -1,3 +1,6 @@
+### Improvements
+added support for custom allocator(s) for pointer like objects. More information on how to correctly use custom allocation and pointers in general see [this](doc/design/pointers.md). 
+
 # [4.6.0](https://github.com/fraillt/bitsery/compare/v4.5.1...v4.6.0) (2019-03-12)
 
 ### Features
